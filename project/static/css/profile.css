@@ -1,0 +1,27 @@
+/* .container{
+    overflow:auto;
+} */
+#name{
+    margin-top: 2.5%;
+    margin-bottom: 2%;
+}
+
+#add{
+    text-align: left;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#profile_table_wrapper{
+    overflow:auto;
+}
+
+.td_buttons{
+    min-width: 200px;
+}
+
+#logout{
+    margin-top: 3%;
+    text-align: center;
+}
+

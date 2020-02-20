@@ -1,0 +1,87 @@
+<!-- templates/profile.html -->
+
+{% extends "base_css.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendor/datatables.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+
+<script src="{{ url_for('static', filename='js/taphold.js')}}"></script>
+<script src="{{ url_for('static', filename='js/profile.js')}}"></script>
+<script src="{{ url_for('static', filename='vendor/datatables.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/jquery.ui.touch-punch.min.js')}}"></script>
+
+
+<div id="name">
+  <h3>
+    Welcome, {{ name }}. 
+  </h3>
+</div>
+
+<!-- Upload button/ to upload page -->
+<div id="add">
+  <a href="{{ url_for('main.savekey') }}">
+    <span class="ui-icon ui-icon-plusthick"></span>Add New Credential
+  </a>
+</div>
+<!-- Load from CDN -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
+<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
+
+<!-- show table -->
+<table id="profile_table">
+  
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <div id="dialog_pw" style="display:none;">
+    <p>Edit Password</p>
+    <textarea id="edit_pw"></textarea>
+  </div>
+
+  <div id="dialog_key_name" style="display:none;">
+    <p>Edit Username</p>
+    <textarea id="edit_key_name"></textarea>
+  </div>
+
+  <div id="dialog_desc" style="display:none;">
+      <p>Edit Description</p>
+      <textarea id="edit_desc"></textarea>
+  </div>
+
+  <tbody>
+    {% for key in credential_list %}
+      <tr class="key_tr" id="{{ key.id }}">
+        <td class="td_desc">{{ key.credential_description }}</td>
+        <td class="td_edit">{{ key.credential_name }}</td>
+        <td>&nbsp&nbsp *********** &nbsp </td>
+        <td class="td_buttons">
+          &nbsp<button type="button" class="b_copy" id="b_copy{{ key.id }}"><span class="ui-icon ui-icon-copy"></span></button>
+          &nbsp<button type="button" class="b_edit" id="b_edit{{ key.id }}"><span class="ui-icon ui-icon-pencil"></span></button>
+          &nbsp<button type="button" class="b_delete" id="b_delete{{ key.id }}"><span class="ui-icon ui-icon-trash"></span>
+        </td>
+      </tr>
+    {% endfor %}     
+  </tbody>
+</table>
+
+<script>
+$(document).ready( function () {
+    $('#profile_table').DataTable();
+} );
+</script>
+
+<!-- logout -->
+<div id="logout">
+  <a href="{{ url_for('auth.logout') }}">
+      Logout
+  </a>
+</div>
+
+{% endblock %}

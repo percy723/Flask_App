@@ -1,0 +1,4 @@
+project/db.sqlite
+project/*.pyc
+key.pem
+cert.pem
